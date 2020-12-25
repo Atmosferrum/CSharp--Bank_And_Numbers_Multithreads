@@ -2,7 +2,9 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -232,7 +234,8 @@ namespace Bank_Independent
 
                 foreach (Client client in Departments[0].Departments[i])
                 {
-                    if (client.Status == Departments[0].Departments[i].GetType().Name)
+
+                    if (client.Status == Departments[0].Departments[i].GetType().GetGenericArguments().Single().Name)
                     {
                         JObject clientJSON = new JObject();
                         clientJSON["status"] = client.Status;
